@@ -56,7 +56,7 @@
       const dx = -1500 * (1 - inP);
       const bob = Math.sin(lt * 38) * 1.5;
       st.car.place(CAR.x0 + dx, CAR.ground + bob, CAR.s);
-      st.car.setWheels((lt * 2600 - dx) / (372 * CAR.s));
+      st.car.setWheels((lt * 2600 - dx) / (st.car.spec.R * CAR.s));
 
       STREAKS.forEach((s, i) => {
         const x = U.mod(s.x - lt * 2600 * s.k, 2600) - 500;

@@ -10,7 +10,7 @@
 
   const GV = { x0: 900, ground: 720, s: 0.17 };
   const GMR = { ground: 720, s: 0.15 };
-  const LAMP_Y = [GV.ground - 1110 * GV.s, GV.ground - 1048 * GV.s];
+  const LAMP_Y = SX.cars.anchor('gv90').map((p) => GV.ground - p[1] * GV.s);
 
   SX.defineScene({
     id: 12,
@@ -44,7 +44,7 @@
       });
       st.gvG = U.s('g', { 'clip-path': 'url(#gv90-reveal)' });
       svg.appendChild(st.gvG);
-      st.gv = SX.cars.build(st.gvG, 'gv90', { body: C.paper, window: C.black, detail: C.black, chrome: C.copper, tire: C.black, rim: '#8E8A84', lamp: C.paper });
+      st.gv = SX.cars.build(st.gvG, 'gv90', { body: C.paper, window: C.black, detail: C.black, chrome: C.copper, tire: C.black, rim: '#8E8A84', lamp: C.magma });
       st.gv.place(GV.x0, GV.ground, GV.s);
 
       st.gmr = SX.cars.build(svg, 'gmr', { body: C.paper, window: C.black, detail: C.black, tire: C.black, rim: C.magma, lamp: C.magma });

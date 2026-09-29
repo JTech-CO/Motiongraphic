@@ -116,7 +116,7 @@
       st.fill.style.height = `${U.lerp(CARD.h, T.H, m).toFixed(1)}px`;
       st.fill.style.background = mix(C.ink, C.copper, m);
 
-      const a = carIn(G80, 4990);
+      const a = carIn(G80, SX.cars.M.dh.L);
       const b = SX.L.pivotCar;
       st.overCar.place(U.lerp(a.x0, b.x0, m), U.lerp(a.ground, b.ground, m), U.lerp(a.s, b.s, m));
       st.overCar.setBody(mix(C.paper, C.ink, m));

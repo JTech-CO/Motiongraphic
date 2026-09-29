@@ -51,7 +51,7 @@
       { model: 'GV70', v: 73564, pct: 32.0, car: 'gv70', suv: true },
       { model: 'GV80 + COUPE', v: 68026, pct: 29.6, car: 'gv80', suv: true },
       { model: 'G80', v: 52277, pct: 22.8, car: 'g80' },
-      { model: 'G70', v: 15962, pct: 7.0, car: 'g70' },
+      { model: 'G70', v: 15962, pct: 7.0, car: 'g70fl' },
       { model: 'G90', v: 10111, pct: 4.4, car: 'g90' },
       { model: 'GV60', v: 4286, pct: 1.9, car: 'gv60', suv: true },
       { model: 'ELECTRIFIED GV70', v: 4153, pct: 1.8, car: 'gv70', suv: true },

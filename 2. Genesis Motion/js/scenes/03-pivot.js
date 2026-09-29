@@ -112,8 +112,9 @@
       // Lamp beams → scene 04 threshold (y 420) and baseline (y 900)
       const chart = SX.L.chart;
       const b = E.inOutCubic(U.prog(lt, 1.55, 2.0));
-      const lampY = [CAR.ground - 1030 * CAR.s, CAR.ground - 962 * CAR.s];
-      const lampX = CAR.x0 + 4930 * CAR.s;
+      const tips = SX.cars.anchor('gv80');
+      const lampY = tips.map((p) => CAR.ground - p[1] * CAR.s);
+      const lampX = CAR.x0 + Math.max(...tips.map((p) => p[0])) * CAR.s;
       st.beams.forEach((l, i) => {
         const y = U.lerp(lampY[i], i ? chart.base : chart.thrY, b);
         const x2 = U.lerp(lampX + 40 * lamp, chart.x1, b);
