@@ -1,0 +1,155 @@
+/* Player chrome (outside the stage, hidden in capture mode) */
+
+#controls {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: var(--ctrl-h);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 0 18px;
+  box-sizing: border-box;
+  background: #0E1015;
+  border-top: 1px solid #23262E;
+  color: #C9C6BF;
+  font: 12px/1 var(--f-mono);
+  letter-spacing: 0.08em;
+  user-select: none;
+}
+
+#controls button {
+  height: 32px;
+  min-width: 32px;
+  padding: 0 10px;
+  border: 1px solid #2E323B;
+  border-radius: 4px;
+  background: #15181F;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  cursor: pointer;
+  transition: background-color 120ms ease-out, border-color 120ms ease-out;
+}
+#controls button:hover {
+  background: #1D212A;
+  border-color: #3B404B;
+}
+#controls button:focus-visible {
+  outline: 2px solid var(--signal);
+  outline-offset: 1px;
+}
+#controls button[aria-pressed='true'] {
+  background: var(--paper);
+  border-color: var(--paper);
+  color: var(--ink);
+}
+#controls .play {
+  width: 44px;
+  font-size: 14px;
+}
+
+.c-time {
+  min-width: 190px;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.c-time b {
+  color: var(--paper);
+  font-weight: 400;
+}
+
+.c-scrub {
+  position: relative;
+  flex: 1;
+  height: 34px;
+  cursor: pointer;
+  touch-action: none;
+}
+.c-segs {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  gap: 2px;
+}
+.c-seg {
+  position: relative;
+  height: 100%;
+  background: #181B22;
+  background-image: repeating-linear-gradient(90deg, transparent 0 calc(var(--bw) - 1px), #2A2E37 calc(var(--bw) - 1px) var(--bw));
+  overflow: hidden;
+}
+.c-seg span {
+  position: absolute;
+  left: 6px;
+  top: 5px;
+  font-size: 10px;
+  color: #6F727A;
+  pointer-events: none;
+}
+.c-seg.on span {
+  color: var(--paper);
+}
+.c-fill {
+  position: absolute;
+  left: 0;
+  top: auto;
+  bottom: 0;
+  height: 3px;
+  background: var(--flame);
+  pointer-events: none;
+}
+.c-head {
+  position: absolute;
+  top: -3px;
+  bottom: -3px;
+  width: 2px;
+  margin-left: -1px;
+  background: var(--paper);
+  pointer-events: none;
+}
+
+.c-scenes {
+  display: flex;
+  gap: 3px;
+}
+#controls .c-scenes button {
+  min-width: 28px;
+  padding: 0 4px;
+}
+
+@media (max-width: 1100px) {
+  .c-scenes {
+    display: none;
+  }
+}
+@media (max-width: 640px) {
+  .c-time {
+    min-width: 0;
+  }
+  .c-time .c-frame {
+    display: none;
+  }
+}
+
+#bigplay {
+  position: fixed;
+  left: 50%;
+  top: calc((100% - var(--ctrl-h)) / 2);
+  transform: translate(-50%, -50%);
+  padding: 16px 26px;
+  border: 1px solid rgba(232, 229, 222, 0.5);
+  border-radius: 6px;
+  background: rgba(11, 13, 18, 0.82);
+  color: var(--paper);
+  font: 14px/1 var(--f-mono);
+  letter-spacing: 0.22em;
+  cursor: pointer;
+}
+#bigplay:hover {
+  background: rgba(11, 13, 18, 0.95);
+}
+#bigplay[hidden] {
+  display: none;
+}

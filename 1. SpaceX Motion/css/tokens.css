@@ -1,0 +1,41 @@
+/* Design tokens: palette, type stacks. Fonts resolve from the local system only (no network). */
+
+@font-face {
+  font-family: 'SX Display';
+  src: local('Pretendard Black'), local('Pretendard-Black'), local('Pretendard Variable Black');
+  font-weight: 900;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'SX Display';
+  src: local('Pretendard Bold'), local('Pretendard-Bold');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'SX Mono';
+  src: local('JetBrains Mono'), local('JetBrainsMono-Regular');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'SX Mono';
+  src: local('JetBrains Mono Bold'), local('JetBrainsMono-Bold');
+  font-weight: 700;
+  font-style: normal;
+}
+
+:root {
+  --space: #0B0D12;
+  --flame: #FF5A1F;
+  --orbit: #2A5BFF;
+  --paper: #E8E5DE;
+  --signal: #FFC83D;
+  --ink: #111318;
+
+  --f-display: 'SX Display', 'Pretendard Variable', 'Noto Sans KR', 'Apple SD Gothic Neo',
+    'Malgun Gothic', system-ui, sans-serif;
+  --f-mono: 'SX Mono', 'JetBrains Mono', 'Cascadia Mono', 'SF Mono', Menlo, Consolas, monospace;
+
+  --ctrl-h: 72px;
+}

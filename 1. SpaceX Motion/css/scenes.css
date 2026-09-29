@@ -1,0 +1,366 @@
+/* Scene roots, shared motion components and per-scene details */
+
+.scene {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  color: var(--fg);
+}
+.scene.bg-dark   { --fg: var(--paper); --bg: var(--space);  --accent: var(--flame); background: transparent; }
+.scene.bg-orange { --fg: var(--ink);   --bg: var(--flame);  --accent: var(--paper); background: var(--flame); }
+.scene.bg-blue   { --fg: var(--paper); --bg: var(--orbit);  --accent: var(--signal); background: var(--orbit); }
+.scene.bg-paper  { --fg: var(--ink);   --bg: var(--paper);  --accent: var(--flame); background: var(--paper); }
+.scene.bg-yellow { --fg: var(--ink);   --bg: var(--signal); --accent: var(--orbit); background: var(--signal); }
+
+.cam {
+  position: absolute;
+  inset: 0;
+  transform-origin: 960px 540px;
+}
+.cam > *,
+.abs {
+  position: absolute;
+}
+.full {
+  left: 0;
+  top: 0;
+  width: 1920px;
+  height: 1080px;
+  overflow: visible;
+}
+
+/* ---------- textures ---------- */
+
+.blueprint {
+  inset: -200px;
+  background-image:
+    linear-gradient(rgba(17, 19, 24, 0.075) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(17, 19, 24, 0.075) 1px, transparent 1px),
+    linear-gradient(rgba(17, 19, 24, 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(17, 19, 24, 0.12) 1px, transparent 1px);
+  background-size: 40px 40px, 40px 40px, 200px 200px, 200px 200px;
+}
+
+.dotgrid {
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(232, 229, 222, 0.28) 1.3px, transparent 1.9px);
+  background-size: 30px 30px;
+}
+
+.glow {
+  width: 1400px;
+  height: 1400px;
+  margin: -700px 0 0 -700px;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* ---------- type ---------- */
+
+.headline {
+  font-family: var(--f-display);
+  font-weight: 900;
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+  white-space: nowrap;
+}
+.hl-line {
+  display: block;
+}
+.headline .ch {
+  display: inline-block;
+  white-space: pre;
+}
+
+.caption {
+  display: flex;
+  align-items: center;
+  font-family: var(--f-mono);
+  font-size: 20px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  white-space: pre;
+}
+.caption::before {
+  content: '';
+  width: 36px;
+  height: 2px;
+  margin-right: 16px;
+  background: currentColor;
+}
+.cap-cur {
+  display: inline-block;
+  width: 0.62em;
+  height: 1.05em;
+  margin-left: 4px;
+  background: currentColor;
+}
+
+.mono {
+  font-family: var(--f-mono);
+  font-size: 16px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.counter {
+  font-family: var(--f-display);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.counter span {
+  display: inline-block;
+  white-space: pre;
+}
+.counter .d {
+  width: 0.6em;
+  text-align: center;
+}
+.counter .p {
+  width: 0.26em;
+  text-align: center;
+}
+
+.chip {
+  padding: 10px 16px 9px;
+  border: 2px solid currentColor;
+  font-family: var(--f-mono);
+  font-size: 18px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transform-origin: 0 50%;
+}
+.chip b {
+  font-family: var(--f-display);
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  font-size: 1.35em;
+  margin-left: 10px;
+}
+
+/* ---------- stamp ---------- */
+
+.stamp {
+  color: var(--stamp-color, var(--flame));
+  transform-origin: 50% 50%;
+}
+.stamp-in {
+  padding: 14px 26px 12px;
+  border: 5px solid currentColor;
+  outline: 2px solid currentColor;
+  outline-offset: 5px;
+  text-align: center;
+  -webkit-mask-image: var(--stamp-mask);
+  mask-image: var(--stamp-mask);
+  -webkit-mask-size: 220px 220px;
+  mask-size: 220px 220px;
+}
+.stamp-main {
+  font-family: var(--f-display);
+  font-weight: 900;
+  font-size: 64px;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+.stamp-sub {
+  margin-top: 8px;
+  font-family: var(--f-mono);
+  font-size: 14px;
+  letter-spacing: 0.22em;
+  white-space: nowrap;
+}
+
+/* ---------- 01 hook ---------- */
+
+.roller {
+  display: inline-block;
+  position: relative;
+  vertical-align: top;
+}
+.roller-row {
+  display: inline-flex;
+}
+.roll-col {
+  display: inline-block;
+  width: 0.6em;
+  height: 1em;
+  line-height: 1;
+  overflow: hidden;
+  text-align: center;
+}
+.roll-strip {
+  display: block;
+}
+.roll-strip span {
+  display: block;
+  height: 1em;
+}
+.roller .ghost {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.trail {
+  width: 4px;
+  background: var(--paper);
+}
+
+/* ---------- 02 failure ---------- */
+
+.slot {
+  width: 292px;
+  height: 440px;
+  border: 2px solid var(--ink);
+  box-sizing: border-box;
+  overflow: hidden;
+}
+.slot-fill {
+  position: absolute;
+  inset: 0;
+  background: var(--flame);
+}
+.slot-top {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  top: 14px;
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--f-mono);
+  font-size: 14px;
+  letter-spacing: 0.18em;
+}
+.slot-year {
+  position: absolute;
+  left: 16px;
+  top: 44px;
+  font-family: var(--f-display);
+  font-weight: 900;
+  font-size: 70px;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.slot-bottom {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--f-mono);
+  font-size: 13px;
+  letter-spacing: 0.18em;
+}
+.slot svg {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+/* ---------- 09 connect / 10 ipo ---------- */
+
+.price-chip {
+  padding: 8px 12px 9px;
+  border: 2px solid var(--ink);
+  background: var(--paper);
+  color: var(--ink);
+  transform-origin: 50% 100%;
+  white-space: nowrap;
+}
+.price-chip.below {
+  transform-origin: 50% 0;
+}
+.price-chip .k {
+  display: block;
+  font-family: var(--f-mono);
+  font-size: 13px;
+  letter-spacing: 0.18em;
+}
+.price-chip .v {
+  display: block;
+  margin-top: 4px;
+  font-family: var(--f-display);
+  font-weight: 900;
+  font-size: 34px;
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+.price-chip.hot {
+  background: var(--flame);
+}
+.price-chip.solid {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* ---------- 11 montage ---------- */
+
+.cut {
+  position: absolute;
+  inset: 0;
+  color: var(--fg);
+}
+.cut > * {
+  position: absolute;
+}
+.cut.bg-dark   { --fg: var(--paper); background: var(--space); }
+.cut.bg-orange { --fg: var(--ink);   background: var(--flame); }
+.cut.bg-blue   { --fg: var(--paper); background: var(--orbit); }
+.cut.bg-paper  { --fg: var(--ink);   background: var(--paper); }
+.cut.bg-yellow { --fg: var(--ink);   background: var(--signal); }
+.cut-big {
+  left: 0;
+  width: 1920px;
+  text-align: center;
+}
+.cut-label {
+  left: 0;
+  width: 1920px;
+  text-align: center;
+  font-size: 22px;
+  letter-spacing: 0.26em;
+}
+.cut-idx {
+  left: 120px;
+  top: 172px;
+  font-size: 18px;
+}
+.segbar {
+  display: flex;
+  height: 26px;
+}
+.segbar i {
+  display: block;
+  height: 100%;
+}
+.seglabels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 15px;
+  letter-spacing: 0.16em;
+}
+
+/* ---------- 12 end card ---------- */
+
+.subcopy {
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: 34px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+.title {
+  font-family: var(--f-display);
+  font-weight: 900;
+  font-size: 118px;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
