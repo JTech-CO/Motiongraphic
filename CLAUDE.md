@@ -9,9 +9,15 @@ Motion Graphic/
 ├── README.md                            허브: 작품(영상·재생·코드) → 템플릿 프롬프트
 ├── CLAUDE.md                            이 문서
 ├── Motion Graphic Template Prompt.txt   모든 작품의 출발점이 되는 템플릿 프롬프트
+├── assets/                              저장소 공용 에셋 (특정 작품에 속하지 않는 것)
+│   ├── og-image.html                    OG 이미지 원본 (SVG를 JS로 생성)
+│   └── og-image.png                     1280×640 소셜 프리뷰
 ├── .claude/launch.json                  작품별 로컬 미리보기 서버
 └── N. <이름> Motion/                    작품 폴더 (번호 순)
 ```
+
+OG 이미지를 고치면 `og-image.html`을 수정한 뒤 Chrome headless로 다시 렌더한다:
+`chrome --headless=new --hide-scrollbars --force-device-scale-factor=1 --window-size=1280,640 --screenshot=assets/og-image.png assets/og-image.html`
 
 ## 작품 폴더 배치 (모든 작품 공통, 바꾸지 않는다)
 

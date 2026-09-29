@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Claude Code Motiongraphic · OG image</title>
+  <!-- Source of og-image.png (1280×640). Render: Chrome headless --screenshot at 1280×640. -->
+  <style>
+    html, body { margin: 0; background: #F4EFE6; }
+    svg { display: block; }
+    .title { font-family: Georgia, 'Times New Roman', serif; font-weight: 700; }
+    .mono { font-family: 'JetBrains Mono', 'Cascadia Mono', Consolas, monospace; letter-spacing: .2em; }
+  </style>
+</head>
+<body>
+<svg id="og" width="1280" height="640" viewBox="0 0 1280 640" xmlns="http://www.w3.org/2000/svg"></svg>
+<script>
+(function () {
+  'use strict';
+  const C = {
+    cream: '#F4EFE6', ink: '#1F1E1D', orange: '#D97757', blue: '#2B5FB4', yellow: '#F6B93B', line: '#1F1E1D',
+  };
+  const NS = 'http://www.w3.org/2000/svg';
+  const svg = document.getElementById('og');
+  const el = (tag, attrs = {}, parent = svg) => {
+    const e = document.createElementNS(NS, tag);
+    for (const k in attrs) e.setAttribute(k, attrs[k]);
+    parent.appendChild(e);
+    return e;
+  };
+  // seeded PRNG (mulberry32)
+  let seed = 20260929;
+  const rnd = () => {
+    seed = (seed + 0x6d2b79f5) | 0;
+    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+
+  // ---------- background ----------
+  el('rect', { width: 1280, height: 640, fill: C.cream });
+  const defs = el('defs');
+  const pat = el('pattern', { id: 'dots', width: 24, height: 24, patternUnits: 'userSpaceOnUse' }, defs);
+  el('circle', { cx: 12, cy: 12, r: 1.3, fill: C.ink, opacity: 0.12 }, pat);
+  el('rect', { width: 1280, height: 640, fill: 'url(#dots)' });
+
+  // ---------- motion path (bouncing-ball arc, character at the apex) ----------
+  const P0 = [200, 270], CP = [640, 80], P2 = [1080, 270];
+  const q = (t) => [
+    (1 - t) * (1 - t) * P0[0] + 2 * (1 - t) * t * CP[0] + t * t * P2[0],
+    (1 - t) * (1 - t) * P0[1] + 2 * (1 - t) * t * CP[1] + t * t * P2[1],
+  ];
+  const APEX = q(0.5);
+
+  // Spotlight disk + orbit guides behind the character
+  el('circle', { cx: APEX[0], cy: APEX[1] + 4, r: 86, fill: C.yellow });
+  el('circle', { cx: APEX[0], cy: APEX[1] + 4, r: 112, fill: 'none', stroke: C.blue, 'stroke-width': 3 });
+  // orbiting satellites on the blue ring
+  [[-28, C.orange, 11], [152, C.ink, 8], [212, C.blue, 9]].forEach(([deg, col, s]) => {
+    const a = (deg * Math.PI) / 180;
+    const x = APEX[0] + 112 * Math.cos(a);
+    const y = APEX[1] + 4 + 112 * Math.sin(a);
+    el('rect', { x: x - s / 2, y: y - s / 2, width: s, height: s, fill: col, transform: `rotate(45 ${x} ${y})` });
+  });
+
+  // Path: dotted arc + easing spacing ticks
+  el('path', { d: `M${P0} Q${CP} ${P2}`, fill: 'none', stroke: C.ink, 'stroke-width': 2, 'stroke-dasharray': '2 8', 'stroke-linecap': 'round', opacity: 0.45 });
+  for (let i = 1; i < 16; i++) {
+    const t = 0.5 - 0.5 * Math.cos((i / 16) * Math.PI); // ease-in-out spacing along the path
+    if (Math.abs(t - 0.5) < 0.06) continue;
+    const [x, y] = q(t);
+    const [x2, y2] = q(t + 0.001);
+    const a = Math.atan2(y2 - y, x2 - x) + Math.PI / 2;
+    el('line', { x1: x - 7 * Math.cos(a), y1: y - 7 * Math.sin(a), x2: x + 7 * Math.cos(a), y2: y + 7 * Math.sin(a), stroke: C.ink, 'stroke-width': 2, opacity: 0.5 });
+  }
+  // Keyframes with bezier handles
+  [[P0, C.orange], [P2, C.blue]].forEach(([p, col]) => {
+    const hx = p[0] + (CP[0] - p[0]) * 0.22;
+    const hy = p[1] + (CP[1] - p[1]) * 0.22;
+    el('line', { x1: p[0], y1: p[1], x2: hx, y2: hy, stroke: C.ink, 'stroke-width': 1.5, opacity: 0.6 });
+    el('circle', { cx: hx, cy: hy, r: 5, fill: C.cream, stroke: C.ink, 'stroke-width': 1.5 });
+    el('rect', { x: p[0] - 9, y: p[1] - 9, width: 18, height: 18, fill: col, stroke: C.ink, 'stroke-width': 2, transform: `rotate(45 ${p[0]} ${p[1]})` });
+  });
+
+  // ---------- Claude Code character (pixel sprite, 14×11) ----------
+  const U = 11;
+  const PIX = [];
+  const put = (cols, rows, color) => rows.forEach((r) => cols.forEach((c) => PIX.push([c, r, color])));
+  const range = (a, b) => Array.from({ length: b - a + 1 }, (_, i) => a + i);
+  put(range(0, 2), [4, 5], 'body'); // arms
+  put(range(11, 13), [4, 5], 'body');
+  put(range(3, 10), range(3, 8), 'body'); // body
+  put([3, 5, 8, 10], [9, 10], 'body'); // legs
+  put([4, 9], [4], 'eye');
+  put([1, 12], range(3, 6), 'phones'); // ear cups
+  put(range(5, 8), [0], 'phones'); // band
+  put([3, 4, 9, 10], [1], 'phones');
+  put([2, 11], [2], 'phones');
+
+  function sprite(parent, cx, cy, s, rot, colors) {
+    const g = el('g', { transform: `translate(${cx} ${cy}) rotate(${rot}) scale(${s}) translate(${-7 * U} ${-5.5 * U})`, 'shape-rendering': 'crispEdges' }, parent);
+    PIX.forEach(([c, r, k]) => {
+      const fill = colors[k];
+      if (fill) el('rect', { x: c * U, y: r * U, width: U + 0.5, height: U + 0.5, fill }, g);
+    });
+    return g;
+  }
+
+  // Onion-skin echoes rising along the path (ease-out spacing toward the apex)
+  const echoes = [
+    [0.1, 0.5, -24, C.blue, 0.3],
+    [0.19, 0.6, -19, C.yellow, 0.75],
+    [0.27, 0.7, -14, C.blue, 0.5],
+    [0.34, 0.8, -10, C.orange, 0.55],
+  ];
+  echoes.forEach(([t, s, rot, col, op]) => {
+    const [x, y] = q(t);
+    const g = sprite(svg, x, y, s, rot, { body: col, phones: col, eye: null });
+    g.setAttribute('opacity', op);
+  });
+
+  // Main character with sound waves from the leading ear cup
+  const main = el('g', { transform: `translate(${APEX[0]} ${APEX[1]}) rotate(-7)` });
+  [[1, C.blue]].forEach(([side, col]) => {
+    [26, 44, 62].forEach((r, i) => {
+      const x0 = side * (6.5 * U + 4);
+      const a = 0.9;
+      const sx = x0 + side * r * Math.cos(a);
+      const sy = -1 * U + -r * Math.sin(a);
+      const ex = x0 + side * r * Math.cos(a);
+      const ey = -1 * U + r * Math.sin(a);
+      el('path', {
+        d: `M${sx} ${sy} A${r} ${r} 0 0 ${side > 0 ? 1 : 0} ${ex} ${ey}`,
+        fill: 'none', stroke: i === 1 ? C.yellow : col, 'stroke-width': 6, 'stroke-linecap': 'square',
+      }, main);
+    });
+  });
+  sprite(main, 0, 0, 1, 0, { body: C.orange, phones: C.blue, eye: C.ink });
+
+  // Pixel confetti around the apex (kept above the title)
+  const pal = [C.orange, C.blue, C.yellow, C.ink];
+  for (let i = 0; i < 34; i++) {
+    const a = rnd() * Math.PI * 2;
+    const r = 130 + rnd() * 140;
+    const x = APEX[0] + r * Math.cos(a) * 1.5;
+    const y = APEX[1] + r * Math.sin(a) * 0.62;
+    if (y > 262 || y < 70 || x < 260 || x > 1020) continue;
+    const s = 5 + Math.floor(rnd() * 3) * 3;
+    el('rect', { x: x - s / 2, y: y - s / 2, width: s, height: s, fill: pal[i % 4], transform: rnd() > 0.6 ? `rotate(45 ${x} ${y})` : '' });
+  }
+
+  // ---------- title ----------
+  const t1 = el('text', { x: 640, y: 384, 'text-anchor': 'middle', class: 'title', 'font-size': 108, fill: C.ink, 'letter-spacing': '-1' });
+  t1.textContent = 'Claude Code';
+  const t2g = el('g');
+  const mk = (dx, dy, fill) => {
+    const t = el('text', { x: 640 + dx, y: 482 + dy, 'text-anchor': 'middle', class: 'title', 'font-size': 94, fill, 'letter-spacing': '-1' }, t2g);
+    t.textContent = 'Motiongraphic';
+    return t;
+  };
+  mk(-5, 0, C.blue);
+  const t2 = mk(0, 0, C.orange);
+  // Speed streaks leading into the second line
+  const bb = t2.getBBox();
+  [[-210, 0.34, 150, C.orange], [-176, 0.56, 110, C.yellow], [-236, 0.76, 170, C.blue]].forEach(([dx, fy, len, col]) => {
+    el('rect', { x: bb.x - 34 - len + (dx + 200) * 0.1, y: bb.y + bb.height * fy, width: len, height: 8, rx: 4, fill: col });
+  });
+
+  // ---------- timeline ----------
+  const TL = { x0: 120, x1: 1160, y: 536 };
+  el('line', { x1: TL.x0, y1: TL.y, x2: TL.x1, y2: TL.y, stroke: C.ink, 'stroke-width': 1.5, opacity: 0.5 });
+  for (let x = TL.x0, i = 0; x <= TL.x1; x += 26, i++) {
+    el('line', { x1: x, y1: TL.y, x2: x, y2: TL.y + (i % 5 === 0 ? 10 : 5), stroke: C.ink, 'stroke-width': 1.5, opacity: i % 5 === 0 ? 0.7 : 0.4 });
+  }
+  const clips = [[120, 380, C.orange, '01 HOOK'], [388, 640, C.blue, '02 BUILD'], [648, 900, C.yellow, '03 MONTAGE'], [908, 1160, C.ink, '04 END CARD']];
+  clips.forEach(([a, b, col, label]) => {
+    el('rect', { x: a, y: TL.y + 18, width: b - a, height: 24, rx: 4, fill: col });
+    const tx = el('text', { x: a + 12, y: TL.y + 35, class: 'mono', 'font-size': 12, fill: col === C.yellow ? C.ink : C.cream });
+    tx.textContent = label;
+  });
+  // keyframes + waveform
+  for (let i = 0; i < 40; i++) {
+    const x = TL.x0 + 13 + i * 26;
+    const h = 3 + Math.round((i % 4 === 0 ? 14 : 5) * (0.5 + rnd() * 0.5));
+    el('rect', { x: x - 2, y: TL.y + 58 - h / 2, width: 4, height: h, fill: C.ink, opacity: 0.45 });
+    if (i % 5 === 2) el('rect', { x: x - 5, y: TL.y + 71, width: 10, height: 10, fill: i % 10 === 2 ? C.orange : C.ink, transform: `rotate(45 ${x} ${TL.y + 76})` });
+  }
+  // playhead aligned with the character
+  el('line', { x1: 640, y1: TL.y - 12, x2: 640, y2: TL.y + 88, stroke: C.orange, 'stroke-width': 3 });
+  el('path', { d: `M628 ${TL.y - 24} H652 V${TL.y - 14} L640 ${TL.y - 4} L628 ${TL.y - 14} Z`, fill: C.orange });
+
+  // ---------- HUD ----------
+  const crop = (x, y, sx, sy) => el('path', { d: `M${x} ${y + sy * 22} V${y} H${x + sx * 22}`, fill: 'none', stroke: C.ink, 'stroke-width': 2, opacity: 0.6 });
+  crop(24, 24, 1, 1); crop(1256, 24, -1, 1); crop(24, 616, 1, -1); crop(1256, 616, -1, -1);
+  const tl = el('text', { x: 56, y: 44, class: 'mono', 'font-size': 13, fill: C.ink, opacity: 0.75 });
+  tl.textContent = 'JTECH-CO / MOTIONGRAPHIC';
+  const tr = el('text', { x: 1150, y: 44, 'text-anchor': 'end', class: 'mono', 'font-size': 13, fill: C.ink, opacity: 0.75 });
+  tr.textContent = 'HTML · 30 FPS · 120 BPM';
+  [0, 1, 2, 3].forEach((i) => el('rect', { x: 1166 + i * 16, y: 33, width: 11, height: 11, fill: i === 0 ? C.orange : 'none', stroke: i === 0 ? C.orange : C.ink, 'stroke-width': 1.5, opacity: i === 0 ? 1 : 0.6 }));
+
+  window.OG_READY = true;
+})();
+</script>
+</body>
+</html>
