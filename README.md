@@ -18,6 +18,16 @@ HTML로 만든 데이터 모션그래픽 모음입니다.
 
 [영상 (MP4)](1.%20SpaceX%20Motion/out/spacex-2002-2026.mp4) · [재생 페이지](1.%20SpaceX%20Motion/index.html) · [코드](1.%20SpaceX%20Motion/) · [프롬프트](1.%20SpaceX%20Motion/prompt/SpaceX%20Prompt.txt) · [스토리보드](1.%20SpaceX%20Motion/prompt/STORYBOARD.md) · [데이터셋](1.%20SpaceX%20Motion/dataset/SpaceX_Dataset_2002-2026.md)
 
+### 2. Genesis 2015—2026
+
+[![Genesis 2015—2026](2.%20Genesis%20Motion/out/poster.jpg)](2.%20Genesis%20Motion/out/genesis-2015-2026.mp4)
+
+배지를 떼고 세단 세 대로 시작한 브랜드가 SUV로 판을 바꿔 연 20만 대를 넘기고, 10년 만에 150만 대를 판 뒤 르망과 GV90으로 향하기까지.
+
+25초 · 120 BPM · 1920×1080 · 30fps · 데이터 기준일 2026-09-29
+
+[영상 (MP4)](2.%20Genesis%20Motion/out/genesis-2015-2026.mp4) · [재생 페이지](2.%20Genesis%20Motion/index.html) · [코드](2.%20Genesis%20Motion/) · [프롬프트](2.%20Genesis%20Motion/prompt/Genesis%20Prompt.txt) · [스토리보드](2.%20Genesis%20Motion/prompt/STORYBOARD.md) · [데이터셋](2.%20Genesis%20Motion/dataset/genesis_brand_dataset.md)
+
 재생 페이지는 GitHub Pages에서 열거나, 내려받은 뒤 `index.html`을 브라우저로 열면 됩니다.
 
 ## 템플릿 프롬프트
@@ -27,3 +37,4 @@ HTML로 만든 데이터 모션그래픽 모음입니다.
 | 작품 | 채운 프롬프트 | 스토리보드 |
 |---|---|---|
 | SpaceX 2002—2026 | [SpaceX Prompt.txt](1.%20SpaceX%20Motion/prompt/SpaceX%20Prompt.txt) | [STORYBOARD.md](1.%20SpaceX%20Motion/prompt/STORYBOARD.md) |
+| Genesis 2015—2026 | [Genesis Prompt.txt](2.%20Genesis%20Motion/prompt/Genesis%20Prompt.txt) | [STORYBOARD.md](2.%20Genesis%20Motion/prompt/STORYBOARD.md) |
