@@ -1,0 +1,95 @@
+/* Persistent HUD in a camera-viewfinder style: corner brackets, scene id + REC timecode,
+   BPM + 4 beat cells, 2006–2026 waypoint flight path, data source line */
+
+#hud {
+  color: var(--hud-fg, var(--mist));
+  font-family: var(--f-mono);
+  font-size: 16px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.vf {
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  border-color: currentColor;
+  border-style: solid;
+  border-width: 0;
+}
+.vf.tl { left: 32px; top: 32px; border-left-width: 3px; border-top-width: 3px; }
+.vf.tr { right: 32px; top: 32px; border-right-width: 3px; border-top-width: 3px; }
+.vf.bl { left: 32px; bottom: 32px; border-left-width: 3px; border-bottom-width: 3px; }
+.vf.br { right: 32px; bottom: 32px; border-right-width: 3px; border-bottom-width: 3px; }
+
+.hud-tl {
+  position: absolute;
+  left: 92px;
+  top: 44px;
+  white-space: nowrap;
+  line-height: 1.6;
+}
+.hud-rec {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  letter-spacing: 0.16em;
+  opacity: 0.9;
+}
+.hud-rec i {
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--beacon);
+}
+
+.hud-tr {
+  position: absolute;
+  right: 92px;
+  top: 44px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  white-space: nowrap;
+}
+.hud-beats {
+  display: flex;
+  gap: 6px;
+}
+.hud-beats i {
+  display: block;
+  width: 12px;
+  height: 12px;
+  border: 1.5px solid currentColor;
+  box-sizing: border-box;
+}
+.hud-beats i.on {
+  background: currentColor;
+}
+
+.hud-src {
+  position: absolute;
+  left: 92px;
+  bottom: 42px;
+  font-size: 14px;
+  letter-spacing: 0.16em;
+  white-space: nowrap;
+  opacity: 0.85;
+}
+
+.hud-path {
+  position: absolute;
+  left: 800px;
+  bottom: 30px;
+  width: 1040px;
+  height: 64px;
+  overflow: visible;
+}
+.hud-path text {
+  font-family: var(--f-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  fill: currentColor;
+}

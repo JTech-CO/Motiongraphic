@@ -12,6 +12,12 @@
       "runtimeExecutable": "python",
       "runtimeArgs": ["-m", "http.server", "5179", "--bind", "127.0.0.1", "--directory", "2. Genesis Motion"],
       "port": 5179
+    },
+    {
+      "name": "dji-motion",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "5180", "--bind", "127.0.0.1", "--directory", "3. DJI Motion"],
+      "port": 5180
     }
   ]
 }

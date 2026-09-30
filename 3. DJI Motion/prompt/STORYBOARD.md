@@ -125,6 +125,7 @@
 - 로고·글자(제품명 각인, Hasselblad 표기 등)는 그리지 않습니다. 경쟁사(GoPro, Insta360)는 제품을 그리지 않고 이름 라벨만 씁니다.
 - 작은 크기(03 편대 아이콘 ~40px, 11 몽타주)에서도 팬텀은 랜딩기어와 흰 바디, Mavic은 둥근 카메라 헤드, Pocket은 막대 그립으로 구분되게 단순화합니다.
 - 구현 단계 검증: 모든 제품을 한 장에 모은 실루엣 비교 시트를 먼저 렌더해, 참고 사진과 나란히 놓고 구분되는지 확인한 뒤 씬에 넣습니다.
+- 구현 메모: SVG path 대신 공식 치수(mm)로 부품을 조립한 3D 리그를 평면 음영 폴리곤으로 투영했습니다(`js/ui/products.js`). 같은 모델을 여러 각도에서 그리고 두 모델 사이를 모핑하기 위해서입니다.
 
 조사 출처: [Mavic 4 Pro 스펙](https://www.dji.com/global/mavic-4-pro/specs) · [Mini 5 Pro 스펙](https://www.dji.com/global/mini-5-pro/specs) · [Osmo Pocket 3 스펙](https://www.dji.com/global/osmo-pocket-3/specs) · [Osmo Pocket 스펙](https://www.dji.com/global/osmo-pocket/specs) · [Osmo Action 5 Pro 스펙](https://www.dji.com/global/osmo-action-5-pro/specs) · [Mavic Mini 사용자 매뉴얼](https://dl.djicdn.com/downloads/Mavic_Mini/Mavic_Mini_User_Manual_v1.0_en_1.pdf) · [Phantom Quick Start Manual](https://dl.djicdn.com/downloads/phantom/en/PHANTOM_Quick_Start_Manual_v1.7_en.pdf) · [DJI Phantom 1 제원](https://aircraftinfo.net/aircraft-types/dji-phantom-1)
 
