@@ -18,6 +18,12 @@
       "runtimeExecutable": "python",
       "runtimeArgs": ["-m", "http.server", "5180", "--bind", "127.0.0.1", "--directory", "3. DJI Motion"],
       "port": 5180
+    },
+    {
+      "name": "loopfield-motion",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "5181", "--bind", "127.0.0.1", "--directory", "4. Loopfield-Studio Motion"],
+      "port": 5181
     }
   ]
 }

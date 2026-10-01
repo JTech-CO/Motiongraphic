@@ -1,0 +1,143 @@
+/* Viewport, fixed 1920×1080 stage and global layers */
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  background: #05070A;
+  color: var(--paper);
+  overflow: hidden;
+}
+
+#viewport {
+  position: fixed;
+  inset: 0 0 var(--ctrl-h) 0;
+  overflow: hidden;
+}
+
+#stage {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1920px;
+  height: 1080px;
+  transform-origin: 0 0;
+  overflow: hidden;
+  background: var(--night);
+  font-variant-numeric: tabular-nums;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
+}
+
+#gl,
+#scenes,
+#grain,
+#hud,
+#beatgrid {
+  position: absolute;
+  inset: 0;
+  width: 1920px;
+  height: 1080px;
+}
+
+#grain,
+#hud,
+#beatgrid {
+  pointer-events: none;
+}
+
+#gl { z-index: 0; }
+#scenes { z-index: 1; }
+#grain { z-index: 4; }
+#hud { z-index: 5; }
+#beatgrid { z-index: 6; }
+
+#grain {
+  opacity: 0.1;
+  mix-blend-mode: soft-light;
+  background-size: 256px 256px;
+}
+
+#nogl {
+  position: absolute;
+  inset: 0;
+  z-index: 7;
+  display: grid;
+  place-items: center;
+  font-family: var(--f-mono);
+  font-size: 22px;
+  letter-spacing: 0.14em;
+  color: var(--paper);
+  background: var(--night);
+}
+
+/* Capture mode: stage pinned at 1:1, no chrome */
+body.capture {
+  background: var(--night);
+}
+body.capture #viewport {
+  inset: 0;
+}
+body.capture #controls,
+body.capture #bigplay {
+  display: none !important;
+}
+
+/* Beat grid overlay (toggle) */
+#beatgrid {
+  color: var(--accent);
+  font-family: var(--f-mono);
+}
+#beatgrid .bg-col {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: currentColor;
+  opacity: 0.22;
+}
+#beatgrid .bg-safe {
+  position: absolute;
+  left: 96px;
+  top: 54px;
+  right: 96px;
+  bottom: 54px;
+  border: 1px dashed currentColor;
+  opacity: 0.35;
+}
+#beatgrid .bg-flash {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 10px;
+  background: currentColor;
+}
+#beatgrid .bg-read {
+  position: absolute;
+  left: 50%;
+  top: 110px;
+  transform: translateX(-50%);
+  padding: 10px 16px;
+  font-size: 22px;
+  letter-spacing: 0.12em;
+  color: var(--ink);
+  background: var(--accent);
+  white-space: pre;
+}
+#beatgrid .bg-cells {
+  position: absolute;
+  left: 50%;
+  top: 170px;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+}
+#beatgrid .bg-cells i {
+  width: 40px;
+  height: 12px;
+  border: 2px solid var(--accent);
+}
+#beatgrid .bg-cells i.on {
+  background: var(--accent);
+}

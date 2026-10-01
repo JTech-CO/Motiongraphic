@@ -38,6 +38,16 @@ HTML로 만든 데이터 모션그래픽 모음입니다.
 
 [영상 (MP4)](3.%20DJI%20Motion/out/dji-2006-2026.mp4) · [재생 페이지](3.%20DJI%20Motion/index.html) · [코드](3.%20DJI%20Motion/) · [프롬프트](3.%20DJI%20Motion/prompt/DJI%20Prompt.txt) · [스토리보드](3.%20DJI%20Motion/prompt/STORYBOARD.md) · [데이터셋](3.%20DJI%20Motion/dataset/DJI_dataset_2006-2026.md)
 
+### 4. Loopfield Studio
+
+[![Loopfield Studio](4.%20Loopfield-Studio%20Motion/out/poster.jpg)](4.%20Loopfield-Studio%20Motion/out/loopfield-studio.mp4)
+
+수식 한 줄이 빛의 무늬가 되고, 프리셋 32종과 레이어 4장을 거쳐 끝과 처음이 맞물린 4K 루프가 되기까지. 화면 속 패턴은 Loopfield 프리셋 GLSL을 영상 안에서 직접 렌더한 것입니다.
+
+25초 · 120 BPM · 1920×1080 · 30fps · 데이터 스냅샷 2026-10-01
+
+[영상 (MP4)](4.%20Loopfield-Studio%20Motion/out/loopfield-studio.mp4) · [재생 페이지](4.%20Loopfield-Studio%20Motion/index.html) · [코드](4.%20Loopfield-Studio%20Motion/) · [프롬프트](4.%20Loopfield-Studio%20Motion/prompt/Loopfield-Studio%20Prompt.txt) · [스토리보드](4.%20Loopfield-Studio%20Motion/prompt/STORYBOARD.md) · [데이터셋](4.%20Loopfield-Studio%20Motion/dataset/loopfield-studio-dataset.md)
+
 재생 페이지는 GitHub Pages에서 열거나, 내려받은 뒤 `index.html`을 브라우저로 열면 됩니다.
 
 ## 템플릿 프롬프트
@@ -49,3 +59,4 @@ HTML로 만든 데이터 모션그래픽 모음입니다.
 | SpaceX 2002—2026 | [SpaceX Prompt.txt](1.%20SpaceX%20Motion/prompt/SpaceX%20Prompt.txt) | [STORYBOARD.md](1.%20SpaceX%20Motion/prompt/STORYBOARD.md) |
 | Genesis 2015—2026 | [Genesis Prompt.txt](2.%20Genesis%20Motion/prompt/Genesis%20Prompt.txt) | [STORYBOARD.md](2.%20Genesis%20Motion/prompt/STORYBOARD.md) |
 | DJI 2006—2026 | [DJI Prompt.txt](3.%20DJI%20Motion/prompt/DJI%20Prompt.txt) | [STORYBOARD.md](3.%20DJI%20Motion/prompt/STORYBOARD.md) |
+| Loopfield Studio | [Loopfield-Studio Prompt.txt](4.%20Loopfield-Studio%20Motion/prompt/Loopfield-Studio%20Prompt.txt) | [STORYBOARD.md](4.%20Loopfield-Studio%20Motion/prompt/STORYBOARD.md) |

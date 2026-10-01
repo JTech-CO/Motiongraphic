@@ -1,0 +1,142 @@
+/* Persistent HUD in a shader-editor style: crop marks, scene id + global phase uLoop, brand + BPM + 4 beat cells,
+   data source line, and a Loopfield-style transport bar (play glyph · seconds · 12-segment scrub · length/fps) */
+
+#hud {
+  color: var(--hud-fg, var(--paper));
+  font-family: var(--f-mono);
+  font-size: 16px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.crop {
+  position: absolute;
+  width: 34px;
+  height: 34px;
+}
+.crop::before,
+.crop::after {
+  content: '';
+  position: absolute;
+  background: currentColor;
+}
+.crop::before { width: 34px; height: 2px; }
+.crop::after { width: 2px; height: 34px; }
+.crop.tl { left: 36px; top: 36px; }
+.crop.tr { right: 36px; top: 36px; }
+.crop.bl { left: 36px; bottom: 36px; }
+.crop.br { right: 36px; bottom: 36px; }
+.crop.tl::before, .crop.tl::after { left: 0; top: 0; }
+.crop.tr::before, .crop.tr::after { right: 0; top: 0; }
+.crop.bl::before, .crop.bl::after { left: 0; bottom: 0; }
+.crop.br::before, .crop.br::after { right: 0; bottom: 0; }
+
+.hud-tl {
+  position: absolute;
+  left: 92px;
+  top: 44px;
+  white-space: nowrap;
+  line-height: 1.6;
+}
+.hud-phase {
+  font-size: 14px;
+  letter-spacing: 0.12em;
+  text-transform: none;
+  opacity: 0.9;
+}
+.hud-phase b {
+  font-weight: 700;
+}
+
+.hud-tr {
+  position: absolute;
+  right: 92px;
+  top: 44px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  white-space: nowrap;
+}
+.hud-beats {
+  display: flex;
+  gap: 6px;
+}
+.hud-beats i {
+  display: block;
+  width: 12px;
+  height: 12px;
+  border: 1.5px solid currentColor;
+  box-sizing: border-box;
+}
+.hud-beats i.on {
+  background: currentColor;
+}
+
+.hud-src {
+  position: absolute;
+  left: 92px;
+  bottom: 42px;
+  font-size: 14px;
+  letter-spacing: 0.16em;
+  white-space: nowrap;
+  opacity: 0.85;
+}
+
+.hud-transport {
+  position: absolute;
+  right: 92px;
+  bottom: 36px;
+  width: 1000px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 14px;
+  letter-spacing: 0.1em;
+  text-transform: none;
+  white-space: nowrap;
+}
+.hud-play {
+  width: 0;
+  height: 0;
+  border-left: 12px solid currentColor;
+  border-top: 7px solid transparent;
+  border-bottom: 7px solid transparent;
+}
+.hud-time {
+  width: 64px;
+}
+.hud-scrub {
+  position: relative;
+  flex: 1;
+  height: 24px;
+}
+.hud-scrub .rail,
+.hud-scrub .fill {
+  position: absolute;
+  left: 0;
+  top: 11px;
+  height: 2px;
+  background: currentColor;
+}
+.hud-scrub .rail {
+  right: 0;
+  opacity: 0.3;
+}
+.hud-scrub .tick {
+  position: absolute;
+  top: 6px;
+  width: 1.5px;
+  height: 12px;
+  background: currentColor;
+  opacity: 0.55;
+}
+.hud-scrub .head {
+  position: absolute;
+  top: 5px;
+  width: 14px;
+  height: 14px;
+  margin-left: -7px;
+  border-radius: 50%;
+  background: var(--accent);
+}
